@@ -2,6 +2,7 @@
 import Veterinario from "../models/Veterinario.js"
 import { sendMailToUser, sendMailToRecoveryPassword } from "../config/nodemailer.js"
 import generarJWT from "../helpers/crearJWT.js"
+import mongoose from "mongoose";
 
 
 
@@ -46,7 +47,12 @@ const login = async(req,res)=>{
 
 
 const perfil=(req,res)=>{
-    res.status(200).json({res:'perfil del veterinario'})
+    delete req.veterinarioBDD.token
+    delete req.veterinarioBDD.confirmEmail
+    delete req.veterinarioBDD.createdAt
+    delete req.veterinarioBDD.updatedAt
+    delete req.veterinarioBDD.__v
+    res.status(200).json(req.veterinarioBDD)
 }
 
 
@@ -103,12 +109,31 @@ const confirmEmail = async(req,res)=>{
 const listarVeterinarios = (req,res)=>{
     res.status(200).json({res:'lista de veterinarios registrados'})
 }
-const detalleVeterinario = (req,res)=>{
-    res.status(200).json({res:'detalle de un eterinario registrado'})
+
+
+const detalleVeterinario = async(req,res)=>{
+    // Ontener datos del request params
+    const {id} = req.params
+
+    // Validar el ID
+    if( !mongoose.Types.ObjectId.isValid(id) ) return res.status(404).json({msg:`Lo sentimos, debe ser un id válido`});
+
+    // Obtener el USUARIO en base al ID
+    const veterinarioBDD = await Veterinario.findById(id).select("-password")
+
+    // Validar si existe el usuario
+    if(!veterinarioBDD) return res.status(404).json({msg:`Lo sentimos, no existe el veterinario ${id}`})
+
+    // Mostramos los datos al usuario
+    res.status(200).json({msg:veterinarioBDD})
 }
+
+
 const actualizarPerfil = (req,res)=>{
     res.status(200).json({res:'actualizar perfil de un veterinario registrado'})
 }
+
+
 const actualizarPassword = (req,res)=>{
     res.status(200).json({res:'actualizar password de un veterinario registrado'})
 }

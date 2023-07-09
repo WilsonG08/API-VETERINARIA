@@ -1,7 +1,6 @@
 import Paciente from "../models/Paciente.js"
 import mongoose from "mongoose"
 
-
 const listarPacientes = async (req,res)=>{
     const pacientes = await Paciente.find({estado:true}).where('veterinario').equals(req.veterinarioBDD).select("-salida -createdAt -updatedAt -__v").populate('veterinario','_id nombre apellido')
     res.status(200).json(pacientes)

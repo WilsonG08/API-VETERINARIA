@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 
-// 
 mongoose.set('strictQuery', true)
 
 const connection = async()=>{
@@ -15,5 +14,4 @@ const connection = async()=>{
     }
 }
 
-// Exportar la funcion cadena de conexion 
 export default  connection

@@ -1,10 +1,5 @@
 // Hacemos la importacion de la funcion Router por parte de express
 import {Router} from 'express'
-// Inicializar la funcion en la variable router
-import verificarAutenticacion from '../middlewares/autenticacion.js'
-
-const router = Router()
-
 import {
     login,
     perfil,
@@ -19,6 +14,12 @@ import {
     nuevoPassword,
 } from "../controllers/veterinario_controller.js";
 
+
+
+// Inicializar la funcion en la variable router
+import verificarAutenticacion from '../middlewares/autenticacion.js'
+
+const router = Router()
 
 
 router.post('/login',login)

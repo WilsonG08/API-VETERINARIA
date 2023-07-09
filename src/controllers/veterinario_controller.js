@@ -127,6 +127,7 @@ const detalleVeterinario = async(req,res)=>{
     res.status(200).json({msg:veterinarioBDD})
 }
 
+/* aqui esta */
 
 const actualizarPerfil = async(req,res)=>{
     const {id} = req.params
@@ -142,7 +143,7 @@ const actualizarPerfil = async(req,res)=>{
             return res.status(404).json({msg:`Lo sentimos, el existe ya se encuentra registrado`})  
         }
     }
-		veterinarioBDD.nombre = req.body.nombre || veterinarioBDD?.nombre
+    veterinarioBDD.nombre = req.body.nombre || veterinarioBDD?.nombre
     veterinarioBDD.apellido = req.body.apellido  || veterinarioBDD?.apellido
     veterinarioBDD.direccion = req.body.direccion ||  veterinarioBDD?.direccion
     veterinarioBDD.telefono = req.body.telefono || veterinarioBDD?.telefono

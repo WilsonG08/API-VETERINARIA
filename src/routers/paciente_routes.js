@@ -1,7 +1,4 @@
 import {Router} from 'express'
-import verificarAutenticacion from "../middlewares/autenticacion.js";
-const router = Router()
-
 import {
     actualizarPaciente,
     detallePaciente,
@@ -9,6 +6,10 @@ import {
     listarPacientes,
     registrarPaciente,
 } from "../controllers/paciente_controller.js";
+import verificarAutenticacion from "../middlewares/autenticacion.js";
+
+const router = Router()
+
 
 router.get("/pacientes",verificarAutenticacion,listarPacientes);
 router.get("/paciente/:id",verificarAutenticacion, detallePaciente);

@@ -5,9 +5,6 @@ import verificarAutenticacion from '../middlewares/autenticacion.js'
 
 const router = Router()
 
-
-
-
 import {
     login,
     perfil,
@@ -36,9 +33,6 @@ router.get('/perfil',verificarAutenticacion,perfil)
 router.put('/veterinario/actualizarpassword',verificarAutenticacion,actualizarPassword)
 router.get('/veterinario/:id',verificarAutenticacion,detalleVeterinario)
 router.put('/veterinario/:id',verificarAutenticacion,actualizarPerfil)
-
-
-
 
 // Exportar la variable router
 export default router
